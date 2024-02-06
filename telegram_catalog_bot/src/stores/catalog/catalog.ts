@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import type {CatalogItem, CatalogState} from "./types"
-import catalogJson from "@/data/xmltojson.json"
+import catalogJson from "@/data/catalog_1.json"
 
 function parseCatalogItems(): CatalogItem[]{
     let res: CatalogItem[] = []

@@ -76,8 +76,6 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-    {{row}}
-    <hr />
   </div>
 </template>
 
