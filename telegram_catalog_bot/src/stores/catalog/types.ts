@@ -15,6 +15,13 @@ export interface CatalogItem{
     description: string
 }
 
+export interface CategoryItem{
+    id: number,
+    title: number,
+    selected: boolean
+}
+
 export interface CatalogState {
+    categories: CategoryItem[],
     items: CatalogItem[]
 }

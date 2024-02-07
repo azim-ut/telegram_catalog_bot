@@ -99,6 +99,7 @@ library.add(
     faBox,
     faCircleFill,
     faCircle,
+    faClose,
     faShoppingCart,
     faFlagCheckered,
     faRotate,
@@ -194,3 +195,26 @@ app
     .component('font-awesome-icon', FontAwesomeIcon)
 
 app.mount('#app')
+
+app.config.globalProperties.$filters = {
+    str_limit(value, size) {
+        if (!value) return '';
+        value = value.toString();
+
+        if (value.length <= size) {
+            return value;
+        }
+        return value.substr(0, size) + '...';
+    }
+}
+
+export function printPrice(price: number, currency: string): string {
+    if(price === 0){
+        return "-"
+    }
+    return Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: currency,
+    }).format(price)
+}
+
