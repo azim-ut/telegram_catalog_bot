@@ -218,3 +218,22 @@ export function printPrice(price: number, currency: string): string {
     }).format(price)
 }
 
+export function printRub(price: number){
+    if(price === 0){
+        return "-"
+    }
+    return Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: "RUB",
+    }).format(price).replace(/RUB\s/, "") + " " + "₽"
+}
+
+export function printNoCurrency(price: number){
+    return Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: "RUB",
+    }).format(price)
+        .replace(/RUB\s/, "")
+        .replace(/\s/, "")
+        .replace(/\.00/, "")
+}

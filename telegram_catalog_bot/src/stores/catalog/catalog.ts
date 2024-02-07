@@ -18,6 +18,7 @@ function parseCategories(): CategoryItem[]{
             return res.push({
                 id: ind,
                 title: row,
+                muted: false,
                 selected: false
             })
         })
@@ -31,9 +32,28 @@ export const catalogStore = defineStore('catalog', {
         categories: parseCategories()
     }),
     getters: {
-        getItems: (state: CatalogState): CatalogItem[] => state.items.slice(0, 100),
-        getCategories: (state: CatalogState): CategoryItem[] => state.categories,
+        getItems: (state: CatalogState): CatalogItem[] => {
+            const categories = state
+                                            .categories
+                                            .filter(cat => cat.selected)
+                                            .map(cat => cat.id)
+            if(categories.length === 0){
+                return state.items.slice(0, 100)
+            }
+            return state.items.filter(row => {
+                return categories.includes(row.categoryId);
+            })
+        },
+        getCategories: (state: CatalogState): CategoryItem[] => state.categories.filter(cat => !cat.muted),
     },
     actions: {
+        clearCategories(){
+            this.$state.categories.forEach(row => row.muted = true)
+            this.$state.items.forEach(item => {
+                this.$state.categories
+                    .filter(cat => cat.muted && cat.id === item.categoryId)
+                    .forEach(cat => cat.muted = false)
+            })
+        }
     }
 })

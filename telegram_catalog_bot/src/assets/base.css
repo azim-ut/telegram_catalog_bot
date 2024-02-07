@@ -279,7 +279,7 @@ div{
 }
 
 .grid31{
-  grid-template-columns: 3fr 1fr;
+    grid-template-columns: 3fr 1fr;
 }
 
 .grid12{

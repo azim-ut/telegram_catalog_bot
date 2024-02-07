@@ -18,6 +18,7 @@ export interface CatalogItem{
 export interface CategoryItem{
     id: number,
     title: number,
+    muted: boolean,
     selected: boolean
 }
 
